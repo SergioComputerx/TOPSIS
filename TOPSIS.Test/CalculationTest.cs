@@ -178,5 +178,18 @@ namespace TOPSIS.Test
 
             Assert.AreEqual(calculation.RowCount, totalCorrectitude);
         }
+        
+         [TestMethod]
+        public void GetBest()
+        {
+            double[] rank = calculation.GetBest();
+
+            for (int i = 0; i < rank.Length; i++)
+            {
+                Console.WriteLine(rank[i]);
+            }
+
+            Assert.Equals(rank.Length, calculation.RowCount);
+        }
     }
 }

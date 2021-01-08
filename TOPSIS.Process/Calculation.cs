@@ -109,5 +109,19 @@ namespace TOPSIS.Process
             for(int i = 0; i < RowCount; i++)
                 RelativeClosenessToIdealSolution[i] = NegativeIdealSolutionSeparation[i] / (IdealSolutionSeparation[i] + NegativeIdealSolutionSeparation[i]);
         }
+        
+         public double[]  GetBest()
+        {
+            double[] Winners = new double[RowCount];
+
+            for (int i = 0; i < RowCount; i++)
+            {
+                double resultado = 1 - RelativeClosenessToIdealSolution[i];
+
+                Winners[i] = resultado;
+            }
+
+            return Winners;
+        }
     }
 }

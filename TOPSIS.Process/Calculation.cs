@@ -7,12 +7,13 @@ namespace TOPSIS.Process
     {
         private double[,] decisionMatrix;
         private double[] weights;
+        private int[] cost_and_benefit;
 
-        public Calculation(double[,] decisionMatrix, double[] weights)
+        public Calculation(double[,] decisionMatrix, double[] weights, int[] cost_and_benefit)
         {
             this.decisionMatrix = decisionMatrix;
             this.weights = weights;
-
+            this.cost_and_benefit = cost_and_benefit;
             RowCount = decisionMatrix.GetLength(0);
             ColumnCount = decisionMatrix.GetLength(1);
 
@@ -27,6 +28,7 @@ namespace TOPSIS.Process
 
             RelativeClosenessToIdealSolution = new double[RowCount];
 
+            SetCostAndBenefitMatrix();
             SetNormalizedMatrix();
             SetNormalizedWeightedMatrix();
             SetIdealSolutions();
@@ -52,6 +54,22 @@ namespace TOPSIS.Process
 
         public double[] RelativeClosenessToIdealSolution { get; set; }
 
+        private void SetCostAndBenefitMatrix()
+        {
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    //custo
+                    if (cost_and_benefit[j] == 1)
+                        decisionMatrix[i, j] = decisionMatrix[i, j] * -1;
+                    //beneficio
+                    else
+                        decisionMatrix[i, j] = decisionMatrix[i, j]; 
+                }
+            }
+        }
+        
         private void SetNormalizedMatrix()
         {
             for (int i = 0; i < RowCount; i++)

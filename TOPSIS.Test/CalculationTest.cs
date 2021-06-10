@@ -25,7 +25,8 @@ namespace TOPSIS.Test
         private double[] correctRelativeClosenessToIdealSolution;
         private double[] calculatedRelativeClosenessToIdealSolution;
         private int targetCorrectitude;
-
+        private int[] cost_and_benefit;
+        
         [TestInitialize]
         public void Initialize()
         {
@@ -36,7 +37,8 @@ namespace TOPSIS.Test
                 { 30, 10, 30, 15 }
             };
             weights = new double[4] { 0.3, 0.1, 0.4, 0.2 };
-
+            cost_and_benefit = new int[4] { 0, 1, 0, 0};
+            
             correctNormalizedMatrix = new double[3, 4]
             {
                 { 0.384, 0.784, 0.570, 0.724 },
@@ -55,7 +57,7 @@ namespace TOPSIS.Test
             correctNegativeIdealSolutionSeparation = new double[] { 0.117, 0.091, 0.147 };
             correctRelativeClosenessToIdealSolution = new double[] { 0.486, 0.427, 0.576 };
 
-            calculation = new Calculation(decisionMatrix, weights);
+            calculation = new Calculation(decisionMatrix, weights, cost_and_benefit);
 
             calculatedNormalizedMatrix = calculation.NormalizedMatrix;
             calculatedNormalizedWeightedMatrix = calculation.NormalizedWeightedMatrix;
